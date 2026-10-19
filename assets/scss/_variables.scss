@@ -1,0 +1,43 @@
+// nptabs – Variablen
+//
+// Alle Werte haben `!default` und lassen sich beim Einbinden überschreiben:
+//
+//   @use 'pfad/zu/nptabs/assets/scss/variables' with (
+//       $color-accent: #e30613,
+//       $tab-padding-inline: 1.5rem
+//   );
+//   @use 'pfad/zu/nptabs/assets/scss/tabs';
+//   @include tabs.styles;
+//
+// Die Werte landen als CSS Custom Properties (--nptabs-*) auf `.nptabs`.
+// Zur Laufzeit lässt sich also alles auch ohne SCSS per Custom Property ändern.
+
+// Name des Cascade Layers. `false` = kein Layer (Regeln konkurrieren dann normal über die Spezifität).
+$layer: nptabs !default;
+
+// Farben (Kontrast auf Weiß: Text 16:1, gedämpfter Text 8,6:1, Akzent 6,9:1)
+$color-text: #1c1c1c !default;
+$color-text-muted: #4a4a4a !default;
+$color-accent: #0b57d0 !default;
+$color-focus: #0b57d0 !default;
+$color-border: #c4c7c5 !default;
+$bg-hover: rgba(11, 87, 208, 0.08) !default;
+$bg-active: transparent !default;
+
+// Tabs
+$tab-padding-block: 0.75rem !default;
+$tab-padding-inline: 1.25rem !default;
+$tab-gap: 0 !default;
+$tab-min-height: 2.75rem !default; // 44 px, großzügig über WCAG 2.5.8 (24 px)
+$tab-font-size: 1rem !default;
+$tab-font-weight: 600 !default;
+$indicator-width: 3px !default;
+$radius: 0.25rem !default;
+
+// Leiste und Panel
+$fade-size: 2.5rem !default; // Ausblend-Bereich, wenn weitere Tabs überstehen
+$panel-padding-block: 1.5rem !default;
+$panel-padding-inline: 0 !default;
+
+// Bewegung
+$duration: 0.15s !default;

@@ -1,0 +1,170 @@
+@use 'variables' as v;
+
+// Gibt das komplette Standard-Styling aus.
+//
+// Aufbau:
+//   .nptabs
+//   ├─ .nptabs__nav               (Wrapper der Leiste, trägt data-overflow-start/-end)
+//   │  └─ .nptabs__tablist        (scrollbar, role="tablist")
+//   │     └─ .nptabs__tab         (button, role="tab", .is-active)
+//   └─ .nptabs__panel             (role="tabpanel", .is-active)
+//      ├─ .nptabs__heading        (nur ohne JS sichtbar)
+//      └─ .nptabs__content
+@mixin styles {
+    @if v.$layer {
+        @layer #{v.$layer} {
+            @include rules;
+        }
+    } @else {
+        @include rules;
+    }
+}
+
+@mixin rules {
+    .nptabs {
+        --nptabs-color-text: #{v.$color-text};
+        --nptabs-color-text-muted: #{v.$color-text-muted};
+        --nptabs-color-accent: #{v.$color-accent};
+        --nptabs-color-focus: #{v.$color-focus};
+        --nptabs-color-border: #{v.$color-border};
+        --nptabs-bg-hover: #{v.$bg-hover};
+        --nptabs-bg-active: #{v.$bg-active};
+        --nptabs-tab-padding-block: #{v.$tab-padding-block};
+        --nptabs-tab-padding-inline: #{v.$tab-padding-inline};
+        --nptabs-tab-gap: #{v.$tab-gap};
+        --nptabs-tab-min-height: #{v.$tab-min-height};
+        --nptabs-tab-font-size: #{v.$tab-font-size};
+        --nptabs-tab-font-weight: #{v.$tab-font-weight};
+        --nptabs-indicator-width: #{v.$indicator-width};
+        --nptabs-radius: #{v.$radius};
+        --nptabs-fade-size: #{v.$fade-size};
+        --nptabs-panel-padding-block: #{v.$panel-padding-block};
+        --nptabs-panel-padding-inline: #{v.$panel-padding-inline};
+        --nptabs-duration: #{v.$duration};
+    }
+
+    // --- Leiste: horizontal scrollbar statt Umbruch ---------------------------
+    .nptabs__nav {
+        position: relative;
+    }
+
+    .nptabs__nav[hidden] {
+        display: none;
+    }
+
+    .nptabs__tablist {
+        --_fade-start: 0px;
+        --_fade-end: 0px;
+
+        display: flex;
+        gap: var(--nptabs-tab-gap);
+        overflow-x: auto;
+        overflow-y: hidden;
+        overscroll-behavior-x: contain;
+        scrollbar-width: thin;
+        // Der Fokus-Scroll lässt so Platz zum Ausblend-Bereich
+        scroll-padding-inline: var(--nptabs-fade-size);
+        // durchgehende Linie unter der Leiste; scrollt nicht mit
+        box-shadow: inset 0 -1px 0 var(--nptabs-color-border);
+        -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--_fade-start), #000 calc(100% - var(--_fade-end)), transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0, #000 var(--_fade-start), #000 calc(100% - var(--_fade-end)), transparent 100%);
+    }
+
+    .nptabs__nav:dir(rtl) .nptabs__tablist {
+        -webkit-mask-image: linear-gradient(to left, transparent 0, #000 var(--_fade-start), #000 calc(100% - var(--_fade-end)), transparent 100%);
+        mask-image: linear-gradient(to left, transparent 0, #000 var(--_fade-start), #000 calc(100% - var(--_fade-end)), transparent 100%);
+    }
+
+    .nptabs__nav[data-overflow-start] .nptabs__tablist {
+        --_fade-start: var(--nptabs-fade-size);
+    }
+
+    .nptabs__nav[data-overflow-end] .nptabs__tablist {
+        --_fade-end: var(--nptabs-fade-size);
+    }
+
+    // --- Tab ------------------------------------------------------------------
+    .nptabs__tab {
+        flex: 0 0 auto;
+        box-sizing: border-box;
+        min-block-size: var(--nptabs-tab-min-height);
+        margin: 0;
+        padding: var(--nptabs-tab-padding-block) var(--nptabs-tab-padding-inline);
+        border: 0;
+        border-block-end: var(--nptabs-indicator-width) solid transparent;
+        border-start-start-radius: var(--nptabs-radius);
+        border-start-end-radius: var(--nptabs-radius);
+        background: transparent;
+        color: var(--nptabs-color-text-muted);
+        font: inherit;
+        font-size: var(--nptabs-tab-font-size);
+        font-weight: var(--nptabs-tab-font-weight);
+        line-height: 1.3;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: color var(--nptabs-duration), background-color var(--nptabs-duration), border-color var(--nptabs-duration);
+    }
+
+    .nptabs__tab:hover {
+        background: var(--nptabs-bg-hover);
+        color: var(--nptabs-color-text);
+    }
+
+    .nptabs__tab[aria-selected='true'] {
+        background: var(--nptabs-bg-active);
+        border-block-end-color: var(--nptabs-color-accent);
+        color: var(--nptabs-color-text);
+    }
+
+    // Fokusring innen, weil die scrollbare Leiste einen äußeren Ring abschneiden würde
+    .nptabs__tab:focus-visible {
+        outline: 3px solid var(--nptabs-color-focus);
+        outline-offset: -3px;
+    }
+
+    // --- Panel ----------------------------------------------------------------
+    .nptabs__panel {
+        padding: var(--nptabs-panel-padding-block) var(--nptabs-panel-padding-inline);
+    }
+
+    .nptabs__panel[hidden],
+    .nptabs__heading[hidden] {
+        display: none;
+    }
+
+    .nptabs__panel:focus-visible {
+        outline: 3px solid var(--nptabs-color-focus);
+        outline-offset: 2px;
+    }
+
+    // Ohne JS stehen die Abschnitte untereinander
+    .nptabs:not([data-nptabs-ready]) .nptabs__panel {
+        padding-block: 0 1.5rem;
+    }
+
+    // --- Bewegung, Kontrastmodus, Druck ---------------------------------------
+    @media (prefers-reduced-motion: reduce) {
+        .nptabs__tab {
+            transition: none;
+        }
+    }
+
+    // Der aktive Tab bleibt über die Rahmenfarbe erkennbar
+    @media (forced-colors: active) {
+        .nptabs__tab[aria-selected='true'] {
+            border-block-end-color: Highlight;
+        }
+    }
+
+    // Beim Drucken alle Inhalte mit Überschrift, ohne Leiste
+    @media print {
+        .nptabs__nav {
+            display: none;
+        }
+
+        .nptabs__panel[hidden],
+        .nptabs__heading[hidden] {
+            display: block !important;
+        }
+    }
+}

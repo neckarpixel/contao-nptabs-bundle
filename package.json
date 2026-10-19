@@ -1,0 +1,12 @@
+{
+    "name": "contao-nptabs-bundle",
+    "private": true,
+    "description": "Build-Skripte für das Standard-CSS (SCSS -> public/nptabs.css)",
+    "scripts": {
+        "build": "sass --no-source-map --style=compressed assets/scss/nptabs.scss public/nptabs.css",
+        "watch": "sass --watch --no-source-map assets/scss/nptabs.scss public/nptabs.css"
+    },
+    "devDependencies": {
+        "sass": "^1.80.0"
+    }
+}

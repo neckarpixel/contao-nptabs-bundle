@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            bool $loadDefaultCss: '%np_tabs.load_default_css%'
+
+    Neckarpixel\NpTabsBundle\Controller\:
+        resource: ../src/Controller/
+        public: true
+
+    Neckarpixel\NpTabsBundle\EventListener\:
+        resource: ../src/EventListener/

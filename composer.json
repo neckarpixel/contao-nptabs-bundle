@@ -1,0 +1,30 @@
+{
+    "name": "neckarpixel/contao-nptabs-bundle",
+    "type": "contao-bundle",
+    "description": "Barrierefreie, responsive Tabs (WAI-ARIA APG, WCAG 2.2 AA) als verschachteltes Inhaltselement für Contao 5.7",
+    "keywords": ["contao", "tabs", "accessibility", "a11y", "wcag", "aria"],
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Neckarpixel",
+            "homepage": "https://github.com/neckarpixel"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "contao/core-bundle": "^5.7",
+        "contao/manager-plugin": "^2.0",
+        "symfony/config": "^6.4 || ^7.0",
+        "symfony/dependency-injection": "^6.4 || ^7.0",
+        "symfony/http-kernel": "^6.4 || ^7.0",
+        "symfony/translation-contracts": "^2.5 || ^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Neckarpixel\\NpTabsBundle\\": "src/"
+        }
+    },
+    "extra": {
+        "contao-manager-plugin": "Neckarpixel\\NpTabsBundle\\ContaoManager\\Plugin"
+    }
+}
