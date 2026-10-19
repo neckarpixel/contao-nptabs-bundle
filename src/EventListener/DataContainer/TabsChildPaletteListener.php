@@ -50,7 +50,7 @@ class TabsChildPaletteListener
 
         $parentType = $this->connection->fetchOne('SELECT type FROM tl_content WHERE id=?', [$row['pid']]);
 
-        if ('nptabs' !== $parentType) {
+        if ('tabs' !== $parentType) {
             return;
         }
 

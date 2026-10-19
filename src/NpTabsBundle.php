@@ -23,7 +23,7 @@ class NpTabsBundle extends AbstractBundle
             ->children()
                 ->booleanNode('load_default_css')
                     ->defaultTrue()
-                    ->info('Lädt bundles/nptabs/nptabs.css, sobald ein Tabs-Element auf der Seite liegt.')
+                    ->info('Lädt bundles/nptabs/tabs.css, sobald ein Tabs-Element auf der Seite liegt.')
                 ->end()
             ->end()
         ;

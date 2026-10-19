@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>nptabs – Demo</title>
-<link rel="stylesheet" href="../public/nptabs.css">
+<title>tabs – Demo</title>
+<link rel="stylesheet" href="../public/tabs.css">
 <style>
   /* Demo-Seite (ohne Layer, gewinnt immer gegen das Bundle-CSS) */
   :root { color-scheme: light; }
@@ -28,22 +28,22 @@
   .demo-dark { background: #14181f; color: #f2f2f2; border-radius: .75rem; padding: 1.5rem; margin-top: 1rem; }
   .demo-dark a { color: #8ab4f8; }
   .demo-theme {
-    --nptabs-color-text: #f5f5f5;
-    --nptabs-color-text-muted: #c9ced6;
-    --nptabs-color-accent: #ffb74d;
-    --nptabs-color-focus: #ffb74d;
-    --nptabs-color-border: #3a4352;
-    --nptabs-bg-hover: rgba(255, 255, 255, .08);
-    --nptabs-radius: 99px;
-    --nptabs-tab-padding-inline: 1.5rem;
-    --nptabs-tab-gap: .25rem;
+    --tabs-color-text: #f5f5f5;
+    --tabs-color-text-muted: #c9ced6;
+    --tabs-color-accent: #ffb74d;
+    --tabs-color-focus: #ffb74d;
+    --tabs-color-border: #3a4352;
+    --tabs-bg-hover: rgba(255, 255, 255, .08);
+    --tabs-radius: 99px;
+    --tabs-tab-padding-inline: 1.5rem;
+    --tabs-tab-gap: .25rem;
   }
 </style>
 </head>
 <body>
 <div class="demo-wrap">
   <header>
-    <h1>nptabs – Demo</h1>
+    <h1>tabs – Demo</h1>
     <p class="demo-lead">Barrierefreie, responsive Tabs für Contao 5.7. Das Markup entspricht der Ausgabe des Twig-Templates, Dummy-Inhalte.</p>
     <p class="demo-note">Bedienung: <kbd>←</kbd> <kbd>→</kbd> bewegen den Fokus, <kbd>Enter</kbd> oder <kbd>Leertaste</kbd> aktiviert (manuelle Aktivierung), <kbd>Home</kbd>/<kbd>Ende</kbd> springen an den Rand, <kbd>Tab</kbd> führt ins Panel.</p>
   </header>
@@ -52,30 +52,30 @@
     <h2>1 · Standard (zweiter Tab aktiv)</h2>
     <p class="demo-note">Mit Text, Liste, Tabelle und Link. Im Backend: „Aktiver Tab beim Laden“ = 2.</p>
     <div class="demo-card">
-<div class="nptabs" data-nptabs data-nptabs-active="1">
-  <div class="nptabs__nav" hidden data-nptabs-nav>
-    <div class="nptabs__tablist" role="tablist" aria-label="Unser Angebot" data-nptabs-tablist>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-101" aria-controls="nptabs-panel-101" aria-selected="false" tabindex="-1" data-nptabs-tab>Übersicht</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-102" aria-controls="nptabs-panel-102" aria-selected="true" tabindex="0" data-nptabs-tab>Leistungen</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-103" aria-controls="nptabs-panel-103" aria-selected="false" tabindex="-1" data-nptabs-tab>Preise</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-104" aria-controls="nptabs-panel-104" aria-selected="false" tabindex="-1" data-nptabs-tab>Kontakt</button>
+<div class="tabs" data-tabs data-tabs-active="1">
+  <div class="tabs__nav" hidden data-tabs-nav>
+    <div class="tabs__tablist" role="tablist" aria-label="Unser Angebot" data-tabs-tablist>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-101" aria-controls="tabs-panel-101" aria-selected="false" tabindex="-1" data-tabs-tab>Übersicht</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-102" aria-controls="tabs-panel-102" aria-selected="true" tabindex="0" data-tabs-tab>Leistungen</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-103" aria-controls="tabs-panel-103" aria-selected="false" tabindex="-1" data-tabs-tab>Preise</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-104" aria-controls="tabs-panel-104" aria-selected="false" tabindex="-1" data-tabs-tab>Kontakt</button>
     </div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-101" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Übersicht</h3>
-    <div class="nptabs__content"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></div>
+  <div class="tabs__panel" id="tabs-panel-101" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Übersicht</h3>
+    <div class="tabs__content"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-102" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Leistungen</h3>
-    <div class="nptabs__content"><p>Was wir anbieten:</p><ul><li>Beratung und Konzeption</li><li>Webdesign und Entwicklung</li><li>Barrierefreiheit nach WCAG 2.2</li></ul><p><a href="#">Mehr erfahren</a></p></div>
+  <div class="tabs__panel" id="tabs-panel-102" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Leistungen</h3>
+    <div class="tabs__content"><p>Was wir anbieten:</p><ul><li>Beratung und Konzeption</li><li>Webdesign und Entwicklung</li><li>Barrierefreiheit nach WCAG 2.2</li></ul><p><a href="#">Mehr erfahren</a></p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-103" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Preise</h3>
-    <div class="nptabs__content"><table><thead><tr><th scope="col">Paket</th><th scope="col">Preis</th></tr></thead><tbody><tr><th scope="row">Basis</th><td>490 €</td></tr><tr><th scope="row">Standard</th><td>990 €</td></tr><tr><th scope="row">Premium</th><td>1.790 €</td></tr></tbody></table></div>
+  <div class="tabs__panel" id="tabs-panel-103" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Preise</h3>
+    <div class="tabs__content"><table><thead><tr><th scope="col">Paket</th><th scope="col">Preis</th></tr></thead><tbody><tr><th scope="row">Basis</th><td>490 €</td></tr><tr><th scope="row">Standard</th><td>990 €</td></tr><tr><th scope="row">Premium</th><td>1.790 €</td></tr></tbody></table></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-104" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Kontakt</h3>
-    <div class="nptabs__content"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p><a class="demo-btn" href="#">Anfrage senden</a></p></div>
+  <div class="tabs__panel" id="tabs-panel-104" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Kontakt</h3>
+    <div class="tabs__content"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p><p><a class="demo-btn" href="#">Anfrage senden</a></p></div>
   </div>
 </div>
     </div>
@@ -83,70 +83,70 @@
     <h2>2 · Viele Tabs – scrollbare Leiste</h2>
     <p class="demo-note">Der Container ist absichtlich schmal. Links/rechts blendet die Leiste aus, wenn weitere Tabs überstehen. Per Pfeiltasten durchgehen, der Fokus scrollt mit.</p>
     <div class="demo-card demo-narrow">
-<div class="nptabs" data-nptabs data-nptabs-active="0">
-  <div class="nptabs__nav" hidden data-nptabs-nav>
-    <div class="nptabs__tablist" role="tablist" aria-label="Bereiche" data-nptabs-tablist>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-105" aria-controls="nptabs-panel-105" aria-selected="true" tabindex="0" data-nptabs-tab>Startseite</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-106" aria-controls="nptabs-panel-106" aria-selected="false" tabindex="-1" data-nptabs-tab>Aktuelles</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-107" aria-controls="nptabs-panel-107" aria-selected="false" tabindex="-1" data-nptabs-tab>Veranstaltungen</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-108" aria-controls="nptabs-panel-108" aria-selected="false" tabindex="-1" data-nptabs-tab>Konzerte</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-109" aria-controls="nptabs-panel-109" aria-selected="false" tabindex="-1" data-nptabs-tab>Chöre</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-110" aria-controls="nptabs-panel-110" aria-selected="false" tabindex="-1" data-nptabs-tab>Orchester</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-111" aria-controls="nptabs-panel-111" aria-selected="false" tabindex="-1" data-nptabs-tab>Gottesdienste</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-112" aria-controls="nptabs-panel-112" aria-selected="false" tabindex="-1" data-nptabs-tab>Kinder & Jugend</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-113" aria-controls="nptabs-panel-113" aria-selected="false" tabindex="-1" data-nptabs-tab>Orgel</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-114" aria-controls="nptabs-panel-114" aria-selected="false" tabindex="-1" data-nptabs-tab>Kirchenmusik</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-115" aria-controls="nptabs-panel-115" aria-selected="false" tabindex="-1" data-nptabs-tab>Förderverein</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-116" aria-controls="nptabs-panel-116" aria-selected="false" tabindex="-1" data-nptabs-tab>Kontakt</button>
+<div class="tabs" data-tabs data-tabs-active="0">
+  <div class="tabs__nav" hidden data-tabs-nav>
+    <div class="tabs__tablist" role="tablist" aria-label="Bereiche" data-tabs-tablist>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-105" aria-controls="tabs-panel-105" aria-selected="true" tabindex="0" data-tabs-tab>Startseite</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-106" aria-controls="tabs-panel-106" aria-selected="false" tabindex="-1" data-tabs-tab>Aktuelles</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-107" aria-controls="tabs-panel-107" aria-selected="false" tabindex="-1" data-tabs-tab>Veranstaltungen</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-108" aria-controls="tabs-panel-108" aria-selected="false" tabindex="-1" data-tabs-tab>Konzerte</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-109" aria-controls="tabs-panel-109" aria-selected="false" tabindex="-1" data-tabs-tab>Chöre</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-110" aria-controls="tabs-panel-110" aria-selected="false" tabindex="-1" data-tabs-tab>Orchester</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-111" aria-controls="tabs-panel-111" aria-selected="false" tabindex="-1" data-tabs-tab>Gottesdienste</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-112" aria-controls="tabs-panel-112" aria-selected="false" tabindex="-1" data-tabs-tab>Kinder & Jugend</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-113" aria-controls="tabs-panel-113" aria-selected="false" tabindex="-1" data-tabs-tab>Orgel</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-114" aria-controls="tabs-panel-114" aria-selected="false" tabindex="-1" data-tabs-tab>Kirchenmusik</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-115" aria-controls="tabs-panel-115" aria-selected="false" tabindex="-1" data-tabs-tab>Förderverein</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-116" aria-controls="tabs-panel-116" aria-selected="false" tabindex="-1" data-tabs-tab>Kontakt</button>
     </div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-105" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Startseite</h3>
-    <div class="nptabs__content"><p><strong>Startseite</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
+  <div class="tabs__panel" id="tabs-panel-105" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Startseite</h3>
+    <div class="tabs__content"><p><strong>Startseite</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-106" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Aktuelles</h3>
-    <div class="nptabs__content"><p><strong>Aktuelles</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
+  <div class="tabs__panel" id="tabs-panel-106" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Aktuelles</h3>
+    <div class="tabs__content"><p><strong>Aktuelles</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-107" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Veranstaltungen</h3>
-    <div class="nptabs__content"><p><strong>Veranstaltungen</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
+  <div class="tabs__panel" id="tabs-panel-107" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Veranstaltungen</h3>
+    <div class="tabs__content"><p><strong>Veranstaltungen</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-108" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Konzerte</h3>
-    <div class="nptabs__content"><p><strong>Konzerte</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
+  <div class="tabs__panel" id="tabs-panel-108" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Konzerte</h3>
+    <div class="tabs__content"><p><strong>Konzerte</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-109" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Chöre</h3>
-    <div class="nptabs__content"><p><strong>Chöre</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
+  <div class="tabs__panel" id="tabs-panel-109" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Chöre</h3>
+    <div class="tabs__content"><p><strong>Chöre</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-110" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Orchester</h3>
-    <div class="nptabs__content"><p><strong>Orchester</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
+  <div class="tabs__panel" id="tabs-panel-110" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Orchester</h3>
+    <div class="tabs__content"><p><strong>Orchester</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-111" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Gottesdienste</h3>
-    <div class="nptabs__content"><p><strong>Gottesdienste</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
+  <div class="tabs__panel" id="tabs-panel-111" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Gottesdienste</h3>
+    <div class="tabs__content"><p><strong>Gottesdienste</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-112" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Kinder & Jugend</h3>
-    <div class="nptabs__content"><p><strong>Kinder & Jugend</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
+  <div class="tabs__panel" id="tabs-panel-112" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Kinder & Jugend</h3>
+    <div class="tabs__content"><p><strong>Kinder & Jugend</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-113" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Orgel</h3>
-    <div class="nptabs__content"><p><strong>Orgel</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
+  <div class="tabs__panel" id="tabs-panel-113" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Orgel</h3>
+    <div class="tabs__content"><p><strong>Orgel</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-114" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Kirchenmusik</h3>
-    <div class="nptabs__content"><p><strong>Kirchenmusik</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
+  <div class="tabs__panel" id="tabs-panel-114" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Kirchenmusik</h3>
+    <div class="tabs__content"><p><strong>Kirchenmusik</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-115" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Förderverein</h3>
-    <div class="nptabs__content"><p><strong>Förderverein</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
+  <div class="tabs__panel" id="tabs-panel-115" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Förderverein</h3>
+    <div class="tabs__content"><p><strong>Förderverein</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-116" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Kontakt</h3>
-    <div class="nptabs__content"><p><strong>Kontakt</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
+  <div class="tabs__panel" id="tabs-panel-116" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Kontakt</h3>
+    <div class="tabs__content"><p><strong>Kontakt</strong> – Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
   </div>
 </div>
     </div>
@@ -154,71 +154,71 @@
     <h2>3 · Verschachtelt</h2>
     <p class="demo-note">Tabs in Tabs, jede Ebene mit eigener Tastaturführung.</p>
     <div class="demo-card">
-<div class="nptabs" data-nptabs data-nptabs-active="0">
-  <div class="nptabs__nav" hidden data-nptabs-nav>
-    <div class="nptabs__tablist" role="tablist" aria-label="Hauptgruppe" data-nptabs-tablist>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-120" aria-controls="nptabs-panel-120" aria-selected="true" tabindex="0" data-nptabs-tab>Außen 1</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-121" aria-controls="nptabs-panel-121" aria-selected="false" tabindex="-1" data-nptabs-tab>Außen 2 (mit Unter-Tabs)</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-122" aria-controls="nptabs-panel-122" aria-selected="false" tabindex="-1" data-nptabs-tab>Außen 3</button>
+<div class="tabs" data-tabs data-tabs-active="0">
+  <div class="tabs__nav" hidden data-tabs-nav>
+    <div class="tabs__tablist" role="tablist" aria-label="Hauptgruppe" data-tabs-tablist>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-120" aria-controls="tabs-panel-120" aria-selected="true" tabindex="0" data-tabs-tab>Außen 1</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-121" aria-controls="tabs-panel-121" aria-selected="false" tabindex="-1" data-tabs-tab>Außen 2 (mit Unter-Tabs)</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-122" aria-controls="tabs-panel-122" aria-selected="false" tabindex="-1" data-tabs-tab>Außen 3</button>
     </div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-120" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Außen 1</h3>
-    <div class="nptabs__content"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
+  <div class="tabs__panel" id="tabs-panel-120" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Außen 1</h3>
+    <div class="tabs__content"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-121" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Außen 2 (mit Unter-Tabs)</h3>
-    <div class="nptabs__content"><p>Tabs in Tabs:</p><div class="nptabs" data-nptabs data-nptabs-active="0">
-  <div class="nptabs__nav" hidden data-nptabs-nav>
-    <div class="nptabs__tablist" role="tablist" aria-label="Untergruppe" data-nptabs-tablist>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-117" aria-controls="nptabs-panel-117" aria-selected="true" tabindex="0" data-nptabs-tab>Innen A</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-118" aria-controls="nptabs-panel-118" aria-selected="false" tabindex="-1" data-nptabs-tab>Innen B</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-119" aria-controls="nptabs-panel-119" aria-selected="false" tabindex="-1" data-nptabs-tab>Innen C</button>
+  <div class="tabs__panel" id="tabs-panel-121" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Außen 2 (mit Unter-Tabs)</h3>
+    <div class="tabs__content"><p>Tabs in Tabs:</p><div class="tabs" data-tabs data-tabs-active="0">
+  <div class="tabs__nav" hidden data-tabs-nav>
+    <div class="tabs__tablist" role="tablist" aria-label="Untergruppe" data-tabs-tablist>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-117" aria-controls="tabs-panel-117" aria-selected="true" tabindex="0" data-tabs-tab>Innen A</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-118" aria-controls="tabs-panel-118" aria-selected="false" tabindex="-1" data-tabs-tab>Innen B</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-119" aria-controls="tabs-panel-119" aria-selected="false" tabindex="-1" data-tabs-tab>Innen C</button>
     </div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-117" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Innen A</h3>
-    <div class="nptabs__content"><p>Innerer Tab A. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></div>
+  <div class="tabs__panel" id="tabs-panel-117" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Innen A</h3>
+    <div class="tabs__content"><p>Innerer Tab A. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-118" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Innen B</h3>
-    <div class="nptabs__content"><p>Innerer Tab B.</p></div>
+  <div class="tabs__panel" id="tabs-panel-118" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Innen B</h3>
+    <div class="tabs__content"><p>Innerer Tab B.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-119" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Innen C</h3>
-    <div class="nptabs__content"><p>Innerer Tab C.</p></div>
+  <div class="tabs__panel" id="tabs-panel-119" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Innen C</h3>
+    <div class="tabs__content"><p>Innerer Tab C.</p></div>
   </div>
 </div></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-122" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Außen 3</h3>
-    <div class="nptabs__content"><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></div>
+  <div class="tabs__panel" id="tabs-panel-122" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Außen 3</h3>
+    <div class="tabs__content"><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></div>
   </div>
 </div>
     </div>
 
     <h2>4 · Eigenes Theme über Custom Properties</h2>
-    <p class="demo-note">Dunkler Hintergrund, Pillenform, andere Akzentfarbe – nur <code>--nptabs-*</code> gesetzt.</p>
+    <p class="demo-note">Dunkler Hintergrund, Pillenform, andere Akzentfarbe – nur <code>--tabs-*</code> gesetzt.</p>
     <div class="demo-dark">
-<div class="nptabs demo-theme" data-nptabs data-nptabs-active="0">
-  <div class="nptabs__nav" hidden data-nptabs-nav>
-    <div class="nptabs__tablist" role="tablist" aria-label="Veranstaltungsinfos" data-nptabs-tablist>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-123" aria-controls="nptabs-panel-123" aria-selected="true" tabindex="0" data-nptabs-tab>Programm</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-124" aria-controls="nptabs-panel-124" aria-selected="false" tabindex="-1" data-nptabs-tab>Anreise</button>
-      <button class="nptabs__tab" type="button" role="tab" id="nptabs-tab-125" aria-controls="nptabs-panel-125" aria-selected="false" tabindex="-1" data-nptabs-tab>Tickets</button>
+<div class="tabs demo-theme" data-tabs data-tabs-active="0">
+  <div class="tabs__nav" hidden data-tabs-nav>
+    <div class="tabs__tablist" role="tablist" aria-label="Veranstaltungsinfos" data-tabs-tablist>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-123" aria-controls="tabs-panel-123" aria-selected="true" tabindex="0" data-tabs-tab>Programm</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-124" aria-controls="tabs-panel-124" aria-selected="false" tabindex="-1" data-tabs-tab>Anreise</button>
+      <button class="tabs__tab" type="button" role="tab" id="tabs-tab-125" aria-controls="tabs-panel-125" aria-selected="false" tabindex="-1" data-tabs-tab>Tickets</button>
     </div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-123" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Programm</h3>
-    <div class="nptabs__content"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
+  <div class="tabs__panel" id="tabs-panel-123" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Programm</h3>
+    <div class="tabs__content"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-124" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Anreise</h3>
-    <div class="nptabs__content"><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></div>
+  <div class="tabs__panel" id="tabs-panel-124" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Anreise</h3>
+    <div class="tabs__content"><p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></div>
   </div>
-  <div class="nptabs__panel" id="nptabs-panel-125" data-nptabs-panel>
-    <h3 class="nptabs__heading" data-nptabs-heading>Tickets</h3>
-    <div class="nptabs__content"><p>Karten gibt es an der Abendkasse.</p></div>
+  <div class="tabs__panel" id="tabs-panel-125" data-tabs-panel>
+    <h3 class="tabs__heading" data-tabs-heading>Tickets</h3>
+    <div class="tabs__content"><p>Karten gibt es an der Abendkasse.</p></div>
   </div>
 </div>
     </div>
@@ -226,12 +226,12 @@
     <h2>5 · Deep Links</h2>
     <p class="demo-note">Öffnen den passenden Tab und scrollen dorthin, auch bei <code>hashchange</code>.</p>
     <ul class="demo-links">
-      <li><a href="#nptabs-tab-104">Zum Tab „Kontakt“ im ersten Beispiel</a></li>
-      <li><a href="#nptabs-panel-112">Zum Panel „Kinder &amp; Jugend“ (Beispiel 2)</a></li>
-      <li><a href="#nptabs-tab-121">Zum Tab „Außen 2“ (Beispiel 3)</a></li>
+      <li><a href="#tabs-tab-104">Zum Tab „Kontakt“ im ersten Beispiel</a></li>
+      <li><a href="#tabs-panel-112">Zum Panel „Kinder &amp; Jugend“ (Beispiel 2)</a></li>
+      <li><a href="#tabs-tab-121">Zum Tab „Außen 2“ (Beispiel 3)</a></li>
     </ul>
   </main>
 </div>
-<script src="../public/nptabs.js"></script>
+<script src="../public/tabs.js"></script>
 </body>
 </html>

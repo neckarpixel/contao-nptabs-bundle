@@ -1,0 +1,96 @@
+{% extends '@Contao/content_element/_base.html.twig' %}
+{% use '@Contao/component/_stylesheet.html.twig' %}
+
+{#
+    Barrierefreie Tabs (WAI-ARIA Authoring Practices, manuelle Aktivierung).
+
+    Progressive Enhancement: Ohne JavaScript bleibt die Tab-Leiste ausgeblendet und
+    alle Inhalte stehen untereinander, jeweils mit ihrer Überschrift. Das Script
+    blendet die Leiste ein, versteckt die Überschriften und setzt die ARIA-Rollen
+    der Panels.
+
+    Anpassbar über Blöcke: tabs_tablist, tabs_tab, tabs_panel
+    Attribute: tabs_attributes, tabs_nav_attributes, tabs_tablist_attributes,
+               tabs_tab_attributes, tabs_panel_attributes
+#}
+
+{% block content %}
+    {% if elements|default %}
+        {% set tabs_attributes = attrs()
+            .addClass('tabs')
+            .set('data-tabs', true)
+            .set('data-tabs-active', active_index|default(0))
+            .mergeWith(tabs_attributes|default)
+        %}
+        <div{{ tabs_attributes }}>
+            {% block tabs_tablist %}
+                {% set tabs_nav_attributes = attrs()
+                    .addClass('tabs__nav')
+                    .set('hidden', true)
+                    .set('data-tabs-nav', true)
+                    .mergeWith(tabs_nav_attributes|default)
+                %}
+                {% set tabs_tablist_attributes = attrs()
+                    .addClass('tabs__tablist')
+                    .set('role', 'tablist')
+                    .setIfExists('aria-label', tabs_label|default)
+                    .set('data-tabs-tablist', true)
+                    .mergeWith(tabs_tablist_attributes|default)
+                %}
+                <div{{ tabs_nav_attributes }}>
+                    <div{{ tabs_tablist_attributes }}>
+                        {% for element in elements %}
+                            {% block tabs_tab %}
+                                {% set tabs_tab_attributes = attrs()
+                                    .addClass('tabs__tab')
+                                    .set('type', 'button')
+                                    .set('role', 'tab')
+                                    .set('id', element.tab_id)
+                                    .set('aria-controls', element.panel_id)
+                                    .set('aria-selected', element.is_active ? 'true' : 'false')
+                                    .set('tabindex', element.is_active ? '0' : '-1')
+                                    .set('data-tabs-tab', true)
+                                    .mergeWith(tabs_tab_attributes|default)
+                                %}
+                                <button{{ tabs_tab_attributes }}>{{ element.header|insert_tag_raw }}</button>
+                            {% endblock %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endblock %}
+
+            {% for element in elements %}
+                {% block tabs_panel %}
+                    {% set tabs_panel_attributes = attrs()
+                        .addClass('tabs__panel')
+                        .set('id', element.panel_id)
+                        .set('data-tabs-panel', true)
+                        .mergeWith(tabs_panel_attributes|default)
+                    %}
+                    <div{{ tabs_panel_attributes }}>
+                        <{{ element.header_tag }} class="tabs__heading" data-tabs-heading>{{ element.header|insert_tag_raw }}</{{ element.header_tag }}>
+                        <div class="tabs__content">
+                            {{ content_element(element.reference) }}
+                        </div>
+                    </div>
+                {% endblock %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+    {% add 'tabs_js' to body %}
+        <script src="{{ asset('bundles/nptabs/tabs.js') }}"></script>
+    {% endadd %}
+{% endblock %}
+
+{% block style %}
+    {% if load_default_css|default(true) %}
+        {% add 'tabs_css' to stylesheets %}
+            {% with {file: tabs_css_file|default(asset('bundles/nptabs/tabs.css'))} %}
+                {{ block('stylesheet_component') }}
+            {% endwith %}
+        {% endadd %}
+    {% endif %}
+{% endblock %}

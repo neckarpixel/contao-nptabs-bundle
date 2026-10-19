@@ -6,7 +6,7 @@ Barrierefreie, responsive Tabs für Contao 5.7 (PHP 8.4), WCAG 2.2 AA.
 - WAI-ARIA Authoring Practices „Tabs with Manual Activation“ (`role=tablist/tab/tabpanel`)
 - Mobil: scrollbare Tab-Leiste mit Ausblend-Effekt, aktiver Tab wird in den Blick gescrollt
 - Progressive Enhancement: ohne JavaScript stehen alle Inhalte mit Überschrift untereinander
-- Vanilla JS (ca. 8 KB, keine Abhängigkeiten), CSS im Cascade Layer `nptabs`, SCSS zum Anpassen
+- Vanilla JS (ca. 8 KB, keine Abhängigkeiten), CSS ohne Layer (niedrige Spezifität, optional als Cascade Layer ausgebbar), SCSS zum Anpassen
 
 ## Installation (lokales Paket)
 
@@ -40,7 +40,7 @@ np_tabs:
     load_default_css: false   # Standard-CSS nicht laden, wenn das Theme alles selbst stylt
 ```
 
-Alternativ im Template nur die Datei tauschen: `{% set nptabs_css_file = asset('css/meine-tabs.css') %}`.
+Alternativ im Template nur die Datei tauschen: `{% set tabs_css_file = asset('css/meine-tabs.css') %}`.
 
 ## Tastatur & Screenreader
 
@@ -57,37 +57,37 @@ Alternativ im Template nur die Datei tauschen: `{% set nptabs_css_file = asset('
 - `prefers-reduced-motion`: keine Übergänge, kein sanftes Scrollen
 - Druck: Leiste aus, alle Panels mit Überschrift
 
-**Deep Links:** `#nptabs-tab-<id>`, `#nptabs-panel-<id>` oder die ID eines beliebigen Elements innerhalb eines Panels öffnen den passenden Tab (beim Laden und bei `hashchange`). `<id>` ist die ID des Kind-Elements.
+**Deep Links:** `#tabs-tab-<id>`, `#tabs-panel-<id>` oder die ID eines beliebigen Elements innerhalb eines Panels öffnen den passenden Tab (beim Laden und bei `hashchange`). `<id>` ist die ID des Kind-Elements.
 
-**Event:** `nptabs:change` (bubbles) mit `detail: { index, tab, panel }`. Nachträglich eingefügtes Markup: `window.NpTabs.init(container)`.
+**Event:** `tabs:change` (bubbles) mit `detail: { index, tab, panel }`. Nachträglich eingefügtes Markup: `window.ContaoTabs.init(container)`.
 
 ## Markup
 
 ```
-div.nptabs[data-nptabs]
-├─ div.nptabs__nav                     (data-overflow-start/-end bei überstehenden Tabs)
-│  └─ div.nptabs__tablist[role=tablist]
-│     └─ button.nptabs__tab[role=tab][aria-selected][aria-controls]
-└─ div.nptabs__panel[role=tabpanel][aria-labelledby]
-   ├─ h2.nptabs__heading               (nur ohne JS sichtbar)
-   └─ div.nptabs__content
+div.tabs[data-tabs]
+├─ div.tabs__nav                     (data-overflow-start/-end bei überstehenden Tabs)
+│  └─ div.tabs__tablist[role=tablist]
+│     └─ button.tabs__tab[role=tab][aria-selected][aria-controls]
+└─ div.tabs__panel[role=tabpanel][aria-labelledby]
+   ├─ h2.tabs__heading               (nur ohne JS sichtbar)
+   └─ div.tabs__content
 ```
 
-Template überschreibbar über `templates/content_element/nptabs.html.twig`, Blöcke: `tabs_tablist`, `tabs_tab`, `tabs_panel`. Zusätzliche Attribute über `tabs_attributes`, `tabs_nav_attributes`, `tabs_tablist_attributes`, `tabs_tab_attributes`, `tabs_panel_attributes`.
+Template überschreibbar über `templates/content_element/tabs.html.twig`, Blöcke: `tabs_tablist`, `tabs_tab`, `tabs_panel`. Zusätzliche Attribute über `tabs_attributes`, `tabs_nav_attributes`, `tabs_tablist_attributes`, `tabs_tab_attributes`, `tabs_panel_attributes`.
 
 ## Eigenes Styling
 
-Nach der Installation ist das Standard-CSS sofort aktiv (`bundles/nptabs/nptabs.css`, wird nur geladen, wenn ein Tabs-Element auf der Seite liegt). Je nach Bedarf gibt es drei Wege.
+Nach der Installation ist das Standard-CSS sofort aktiv (`bundles/nptabs/tabs.css`, wird nur geladen, wenn ein Tabs-Element auf der Seite liegt). Je nach Bedarf gibt es drei Wege.
 
 ### Weg 1 – Werte per Custom Properties (reicht meistens)
 
-Im Theme-CSS die `--nptabs-*`-Properties setzen, ohne Layer:
+Im Theme-CSS die `--tabs-*`-Properties setzen, ohne Layer:
 
 ```css
-.nptabs {
-    --nptabs-color-accent: #e30613;
-    --nptabs-tab-padding-inline: 1.5rem;
-    --nptabs-radius: 99px;
+.tabs {
+    --tabs-color-accent: #e30613;
+    --tabs-tab-padding-inline: 1.5rem;
+    --tabs-radius: 99px;
 }
 ```
 
@@ -98,10 +98,10 @@ Kein Build, kein `!important`. Das Standard-CSS bleibt aktiv.
 Wenn Properties nicht reichen, einfache Selektoren im Theme-CSS, ebenfalls ohne Layer:
 
 ```css
-.nptabs__tab[aria-selected='true'] { text-decoration: underline; }
+.tabs__tab[aria-selected='true'] { text-decoration: underline; }
 ```
 
-Das gewinnt immer gegen das Bundle-CSS. Globale Theme-Regeln für `button` schlagen ebenfalls durch und müssen ggf. für `.nptabs__tab` zurückgesetzt werden.
+Das gewinnt immer gegen das Bundle-CSS. Globale Theme-Regeln für `button` schlagen ebenfalls durch und müssen ggf. für `.tabs__tab` zurückgesetzt werden.
 
 ### Weg 3 – Komplett per SCSS
 
@@ -116,12 +116,12 @@ Das gewinnt immer gegen das Bundle-CSS. Globale Theme-Regeln für `button` schla
 2. Bundle-SCSS im eigenen SCSS einbinden und Variablen setzen (`assets/scss/`: `_variables.scss` mit allen Werten als `!default`, `_tabs.scss` mit dem Mixin `styles`):
 
    ```scss
-   @use 'pfad/zu/nptabs/assets/scss/variables' with (
+   @use 'pfad/zu/tabs/assets/scss/variables' with (
        $color-accent: #e30613,
        $tab-padding-inline: 1.5rem,
-       $layer: false            // false = ohne Cascade Layer ausgeben
+       $layer: tabs             // optional: als Cascade Layer ausgeben (Standard: false)
    );
-   @use 'pfad/zu/nptabs/assets/scss/tabs';
+   @use 'pfad/zu/tabs/assets/scss/tabs';
    @include tabs.styles;
    ```
 
@@ -129,46 +129,50 @@ Das gewinnt immer gegen das Bundle-CSS. Globale Theme-Regeln für `button` schla
 
 3. Das kompilierte CSS im Theme laden.
 
-Das mitgelieferte CSS neu bauen: `npm install && npm run build` (Dart Sass → `public/nptabs.css`).
+Das mitgelieferte CSS neu bauen: `npm install && npm run build` (Dart Sass → `public/tabs.css`).
 
-Wer die HTML-Struktur ändern muss, kopiert `nptabs.html.twig` nach `templates/content_element/` und passt es dort an.
+Wer die HTML-Struktur ändern muss, kopiert `tabs.html.twig` nach `templates/content_element/` und passt es dort an.
 
 ### Welche Property steuert was
 
-![Schema der Tab-Leiste mit nummerierten Markierungen für jede Custom Property](docs/nptabs-properties.svg)
+![Schema der Tab-Leiste mit nummerierten Markierungen für jede Custom Property](docs/tabs-properties.svg)
 
 | Nr. | Property | Standard | Wirkung |
 |---|---|---|---|
-| 1 | `--nptabs-color-border` | `#c4c7c5` | Trennlinie unter der Leiste |
-| 2 | `--nptabs-color-accent` | `#0b57d0` | Linie unter dem aktiven Tab |
-| 2 | `--nptabs-indicator-width` | `3px` | Dicke dieser Linie |
-| 3 | `--nptabs-color-text` | `#1c1c1c` | Text des aktiven und des gehoverten Tabs |
-| 4 | `--nptabs-bg-hover` | `rgba(11, 87, 208, 0.08)` | Hintergrund bei Hover |
-| 4 | `--nptabs-bg-active` | `transparent` | Hintergrund des aktiven Tabs |
-| 5 | `--nptabs-color-text-muted` | `#4a4a4a` | Text inaktiver Tabs |
-| 6 | `--nptabs-color-focus` | `#0b57d0` | Fokusring von Tab und Panel |
-| 7 | `--nptabs-tab-padding-block` / `-inline` | `0.75rem` / `1.25rem` | Innenabstand der Tabs |
-| 8 | `--nptabs-tab-min-height` | `2.75rem` | Mindesthöhe der Tabs (44 px, Zielgröße) |
-| 9 | `--nptabs-tab-gap` | `0` | Abstand zwischen den Tabs |
-| 10 | `--nptabs-radius` | `0.25rem` | Rundung der oberen Tab-Ecken (`99px` = Pille) |
-| 11 | `--nptabs-fade-size` | `2.5rem` | Breite des Ausblendens bei überstehenden Tabs |
-| 12 | `--nptabs-tab-font-size` / `-font-weight` | `1rem` / `600` | Schrift der Tabs |
-| 13 | `--nptabs-panel-padding-block` / `-inline` | `1.5rem` / `0` | Innenabstand des Panels |
-| 14 | `--nptabs-duration` | `0.15s` | Dauer der Übergänge |
+| 1 | `--tabs-color-border` | `#c4c7c5` | Trennlinie unter der Leiste |
+| 2 | `--tabs-color-accent` | `#0b57d0` | Linie unter dem aktiven Tab |
+| 2 | `--tabs-indicator-width` | `3px` | Dicke dieser Linie |
+| 3 | `--tabs-color-text` | `#1c1c1c` | Text des aktiven und des gehoverten Tabs |
+| 4 | `--tabs-bg-hover` | `rgba(11, 87, 208, 0.08)` | Hintergrund bei Hover |
+| 4 | `--tabs-bg-active` | `transparent` | Hintergrund des aktiven Tabs |
+| 5 | `--tabs-color-text-muted` | `#4a4a4a` | Text inaktiver Tabs |
+| 6 | `--tabs-color-focus` | `#0b57d0` | Fokusring von Tab und Panel |
+| 7 | `--tabs-tab-padding-block` / `-inline` | `0.75rem` / `1.25rem` | Innenabstand der Tabs |
+| 8 | `--tabs-tab-min-height` | `2.75rem` | Mindesthöhe der Tabs (44 px, Zielgröße) |
+| 9 | `--tabs-tab-gap` | `0` | Abstand zwischen den Tabs |
+| 10 | `--tabs-radius` | `0.25rem` | Rundung der oberen Tab-Ecken (`99px` = Pille) |
+| 11 | `--tabs-fade-size` | `2.5rem` | Breite des Ausblendens bei überstehenden Tabs |
+| 12 | `--tabs-tab-font-size` / `-font-weight` | `1rem` / `600` | Schrift der Tabs |
+| 13 | `--tabs-panel-padding` | `1.5rem 0` | Innenabstand des Panels (Kurzschreibweise wie `padding`, 1–4 Werte) |
+| 14 | `--tabs-duration` | `0.15s` | Dauer der Übergänge |
 
-Die SCSS-Variablen in `_variables.scss` heißen genauso, nur ohne Präfix (z. B. `$color-accent`).
+Die SCSS-Variablen in `_variables.scss` heißen genauso, nur ohne Präfix (z. B. `$color-accent`, `$panel-padding`).
 
 ### Cascade Layer und Rangfolge
 
-Das Standard-CSS liegt komplett im Layer **`nptabs`**. Wo eigene Regeln stehen, entscheidet über den Gewinner:
+Das Standard-CSS wird **ohne Layer** ausgeliefert. Alle Selektoren sind einfache Klassen (Spezifität 0-1-0), eigene Regeln mit gleicher oder höherer Spezifität gewinnen über die Ladereihenfolge. Außerdem schlagen sie typische Reset-Regeln wie `button { … }` oder `div { padding: 0 }`.
+
+Der Grund: Ein Layer-CSS verliert immer gegen ungelayertes CSS. Enthält die Seite einen Reset ohne Layer (z. B. Contaos `reset.css`), würden dessen Regeln `font-size`, `font-weight` und `padding` der Tabs überschreiben.
+
+Wer das Layer-Verhalten trotzdem will (Seite komplett in Layern organisiert), gibt das CSS per SCSS mit `$layer: tabs` aus (siehe Weg 3). Dann gilt:
 
 | Eigene Regeln … | Ergebnis |
 |---|---|
-| ohne Layer (normales Theme-CSS) | gewinnen immer, egal bei welcher Spezifität oder Ladereihenfolge |
-| in einem anderen Layer, der nach `nptabs` kommt | gewinnen |
-| im selben Layer `@layer nptabs { … }` | normale Regeln: Spezifität, dann Ladereihenfolge. Nicht empfohlen |
+| ohne Layer | gewinnen immer, egal bei welcher Spezifität oder Ladereihenfolge |
+| in einem Layer, der nach `tabs` kommt | gewinnen |
+| im selben Layer `tabs` | Spezifität, dann Ladereihenfolge |
 
-Rangfolge explizit festlegen (ganz oben im CSS): `@layer vendor, nptabs, theme;`
+Reihenfolge festlegen (ganz oben im CSS): `@layer vendor, tabs, theme;`
 
 ## Hinweise
 

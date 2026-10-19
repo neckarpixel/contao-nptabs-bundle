@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 // Eltern-Element "Tabs": gleiche Struktur wie das Core-Accordion
-$GLOBALS['TL_DCA']['tl_content']['palettes']['nptabs'] = '{type_legend},type,headline,title;{nptabs_legend},nptabs_label,nptabs_activeTab;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},cssID;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['tabs'] = '{type_legend},type,headline,title;{nptabs_legend},nptabs_label,nptabs_activeTab;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},cssID;{invisible_legend:hide},invisible,start,stop';
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['nptabs_label'] = [
     'inputType' => 'text',

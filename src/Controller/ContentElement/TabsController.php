@@ -21,7 +21,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * Jedes Kind wird zu einem Tab, die "Abschnittsüberschrift" (sectionHeadline)
  * des Kindes ist die Beschriftung des Tabs.
  */
-#[AsContentElement(type: 'nptabs', category: 'miscellaneous', nestedFragments: true)]
+#[AsContentElement(type: 'tabs', category: 'miscellaneous', nestedFragments: true)]
 class TabsController extends AbstractContentElementController
 {
     private const HEADING_TAGS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
@@ -56,8 +56,8 @@ class TabsController extends AbstractContentElementController
             $number = \count($elements) + 1;
 
             $elements[] = [
-                'tab_id' => 'nptabs-tab-'.$nestedModel->id,
-                'panel_id' => 'nptabs-panel-'.$nestedModel->id,
+                'tab_id' => 'tabs-tab-'.$nestedModel->id,
+                'panel_id' => 'tabs-panel-'.$nestedModel->id,
                 'header' => '' !== $text ? $text : sprintf($fallback, $number),
                 'header_tag' => \in_array($unit, self::HEADING_TAGS, true) ? $unit : 'h2',
                 'reference' => $reference,
