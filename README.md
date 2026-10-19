@@ -113,19 +113,17 @@ Das gewinnt immer gegen das Bundle-CSS. Globale Theme-Regeln für `button` schla
        load_default_css: false
    ```
 
-2. Bundle-SCSS im eigenen SCSS einbinden und Variablen setzen (`assets/scss/`: `_variables.scss` mit allen Werten als `!default`, `_tabs.scss` mit dem Mixin `styles`):
+2. Bundle-SCSS im eigenen SCSS einbinden (`assets/scss/_tabs.scss`: oben alle Variablen mit `!default`, darunter die Regeln). Das CSS entsteht direkt beim `@use`:
 
    ```scss
-   @use 'pfad/zu/tabs/assets/scss/variables' with (
+   @use 'pfad/zu/bundle/assets/scss/tabs' with (
        $color-accent: #e30613,
        $tab-padding-inline: 1.5rem,
        $layer: tabs             // optional: als Cascade Layer ausgeben (Standard: false)
    );
-   @use 'pfad/zu/tabs/assets/scss/tabs';
-   @include tabs.styles;
    ```
 
-   `@use … with` muss vor jedem anderen Laden der Variablen stehen.
+   Nicht genannte Variablen behalten ihren Standardwert. Das `@use … with` muss die erste Einbindung dieser Datei sein.
 
 3. Das kompilierte CSS im Theme laden.
 
@@ -156,7 +154,7 @@ Wer die HTML-Struktur ändern muss, kopiert `tabs.html.twig` nach `templates/con
 | 13 | `--tabs-panel-padding` | `1.5rem 0` | Innenabstand des Panels (Kurzschreibweise wie `padding`, 1–4 Werte) |
 | 14 | `--tabs-duration` | `0.15s` | Dauer der Übergänge |
 
-Die SCSS-Variablen in `_variables.scss` heißen genauso, nur ohne Präfix (z. B. `$color-accent`, `$panel-padding`).
+Die SCSS-Variablen (oben in `_tabs.scss`) heißen genauso, nur ohne Präfix (z. B. `$color-accent`, `$panel-padding`).
 
 ### Cascade Layer und Rangfolge
 

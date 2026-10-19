@@ -1,6 +1,0 @@
-// Einstiegspunkt für das mitgelieferte Standard-CSS (public/nptabs.css).
-// Eigene Anpassung: siehe _variables.scss und README.
-@use 'variables';
-@use 'tabs';
-
-@include tabs.styles;

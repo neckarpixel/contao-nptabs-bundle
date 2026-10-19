@@ -1,8 +1,49 @@
-@use 'variables' as v;
-
-// Gibt das komplette Standard-Styling aus.
+// tabs – Standard-Styling für die Tabs
 //
-// Aufbau:
+// Einbinden (Variablen optional überschreiben, das CSS entsteht beim @use):
+//
+//   @use 'pfad/zu/bundle/assets/scss/tabs' with (
+//       $color-accent: #e30613,
+//       $tab-padding-inline: 1.5rem
+//   );
+//
+// Die Werte landen als CSS Custom Properties (--tabs-*) auf `.tabs`.
+// Zur Laufzeit lässt sich also alles auch ohne SCSS per Custom Property ändern.
+
+// --- Variablen (alle mit !default, also überschreibbar) ---------------------
+
+// Cascade Layer. Standard `false` = kein Layer: Die Regeln konkurrieren normal über die Spezifität.
+// Wichtig: Ungelayerte Reset-CSS (z. B. Contao reset.css: `button { font-size: 99% }`, `div { padding: 0 }`)
+// schlagen Layer-Regeln IMMER. Einen Layer (z. B. `tabs`) nur setzen, wenn die Seite keinen ungelayerten Reset hat.
+$layer: false !default;
+
+// Farben (Kontrast auf Weiß: Text 16:1, gedämpfter Text 8,6:1, Akzent 6,9:1)
+$color-text: #1c1c1c !default;
+$color-text-muted: #4a4a4a !default;
+$color-accent: #0b57d0 !default;
+$color-focus: #0b57d0 !default;
+$color-border: #c4c7c5 !default;
+$bg-hover: rgba(11, 87, 208, 0.08) !default;
+$bg-active: transparent !default;
+
+// Tabs
+$tab-padding-block: 0.75rem !default;
+$tab-padding-inline: 1.25rem !default;
+$tab-gap: 0 !default;
+$tab-min-height: 2.75rem !default; // 44 px, großzügig über WCAG 2.5.8 (24 px)
+$tab-font-size: 1rem !default;
+$tab-font-weight: 600 !default;
+$indicator-width: 3px !default;
+$radius: 0.25rem !default;
+
+// Leiste und Panel
+$fade-size: 2.5rem !default; // Ausblend-Bereich, wenn weitere Tabs überstehen
+$panel-padding: 1.5rem 0 !default; // Shorthand wie `padding`: 1-4 Werte
+
+// Bewegung
+$duration: 0.15s !default;
+
+// Aufbau der Ausgabe:
 //   .tabs
 //   ├─ .tabs__nav               (Wrapper der Leiste, trägt data-overflow-start/-end)
 //   │  └─ .tabs__tablist        (scrollbar, role="tablist")
@@ -10,36 +51,30 @@
 //   └─ .tabs__panel             (role="tabpanel", .is-active)
 //      ├─ .tabs__heading        (nur ohne JS sichtbar)
 //      └─ .tabs__content
-@mixin styles {
-    @if v.$layer {
-        @layer #{v.$layer} {
-            @include rules;
-        }
-    } @else {
-        @include rules;
-    }
-}
 
-@mixin rules {
+// --- Regeln -----------------------------------------------------------------
+
+// Nur intern: Der Regelblock wird entweder direkt oder im Layer ausgegeben.
+@mixin -rules {
     .tabs {
-        --tabs-color-text: #{v.$color-text};
-        --tabs-color-text-muted: #{v.$color-text-muted};
-        --tabs-color-accent: #{v.$color-accent};
-        --tabs-color-focus: #{v.$color-focus};
-        --tabs-color-border: #{v.$color-border};
-        --tabs-bg-hover: #{v.$bg-hover};
-        --tabs-bg-active: #{v.$bg-active};
-        --tabs-tab-padding-block: #{v.$tab-padding-block};
-        --tabs-tab-padding-inline: #{v.$tab-padding-inline};
-        --tabs-tab-gap: #{v.$tab-gap};
-        --tabs-tab-min-height: #{v.$tab-min-height};
-        --tabs-tab-font-size: #{v.$tab-font-size};
-        --tabs-tab-font-weight: #{v.$tab-font-weight};
-        --tabs-indicator-width: #{v.$indicator-width};
-        --tabs-radius: #{v.$radius};
-        --tabs-fade-size: #{v.$fade-size};
-        --tabs-panel-padding: #{v.$panel-padding};
-        --tabs-duration: #{v.$duration};
+        --tabs-color-text: #{$color-text};
+        --tabs-color-text-muted: #{$color-text-muted};
+        --tabs-color-accent: #{$color-accent};
+        --tabs-color-focus: #{$color-focus};
+        --tabs-color-border: #{$color-border};
+        --tabs-bg-hover: #{$bg-hover};
+        --tabs-bg-active: #{$bg-active};
+        --tabs-tab-padding-block: #{$tab-padding-block};
+        --tabs-tab-padding-inline: #{$tab-padding-inline};
+        --tabs-tab-gap: #{$tab-gap};
+        --tabs-tab-min-height: #{$tab-min-height};
+        --tabs-tab-font-size: #{$tab-font-size};
+        --tabs-tab-font-weight: #{$tab-font-weight};
+        --tabs-indicator-width: #{$indicator-width};
+        --tabs-radius: #{$radius};
+        --tabs-fade-size: #{$fade-size};
+        --tabs-panel-padding: #{$panel-padding};
+        --tabs-duration: #{$duration};
     }
 
     // --- Leiste: horizontal scrollbar statt Umbruch ---------------------------
@@ -166,4 +201,12 @@
             display: block !important;
         }
     }
+}
+
+@if $layer {
+    @layer #{$layer} {
+        @include -rules;
+    }
+} @else {
+    @include -rules;
 }

@@ -1,6 +1,3 @@
 // Einstiegspunkt für das mitgelieferte Standard-CSS (public/tabs.css).
-// Eigene Anpassung: siehe _variables.scss und README.
-@use 'variables';
+// Eigene Anpassung: siehe Variablen oben in _tabs.scss und README.
 @use 'tabs';
-
-@include tabs.styles;

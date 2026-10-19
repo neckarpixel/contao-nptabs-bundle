@@ -1,1 +1,2 @@
-# Marker: Wurzel der Twig-Templates.
+# Marker: Dieses Verzeichnis ist die Wurzel der Twig-Templates dieses Bundles.
+# Dadurch heissen die Templates "content_element/tabs" statt nur "tabs".
