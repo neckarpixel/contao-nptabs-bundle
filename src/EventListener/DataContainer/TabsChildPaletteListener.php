@@ -12,10 +12,13 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Stellt sicher, dass Kind-Elemente eines Tabs-Elements das Feld "sectionHeadline"
- * (= Tab-Beschriftung) in ihrer Palette haben – unabhängig vom Elementtyp.
+ * (= Tab-Beschriftung, im Backend "Bereichsüberschrift") in ihrer Palette haben –
+ * unabhängig vom Elementtyp.
  *
- * Ist das Feld bereits in der Palette (z. B. weil der Core es selbst ergänzt),
- * passiert nichts.
+ * Die Position entspricht dem Core-Accordion: eine eigene Legende
+ * "Bereichseinstellungen" (section_legend) ganz oben, vor dem Elementtyp.
+ *
+ * Ist das Feld bereits in der Palette, passiert nichts.
  */
 #[AsCallback(table: 'tl_content', target: 'config.onload')]
 class TabsChildPaletteListener
@@ -61,16 +64,18 @@ class TabsChildPaletteListener
             }
 
             try {
+                // Wie beim Core-Accordion: Legende "Bereichseinstellungen" vor dem Elementtyp
                 PaletteManipulator::create()
-                    ->addField('sectionHeadline', 'type_legend', PaletteManipulator::POSITION_APPEND)
+                    ->addLegend('section_legend', 'type_legend', PaletteManipulator::POSITION_BEFORE)
+                    ->addField('sectionHeadline', 'section_legend', PaletteManipulator::POSITION_APPEND)
                     ->applyToPalette($palette, 'tl_content')
                 ;
             } catch (\Throwable) {
-                // Palette ohne "type_legend": eigene Legende voranstellen
+                // Palette ohne "type_legend": Legende ganz an den Anfang setzen
                 try {
                     PaletteManipulator::create()
-                        ->addLegend('nptabs_legend', null, PaletteManipulator::POSITION_PREPEND)
-                        ->addField('sectionHeadline', 'nptabs_legend', PaletteManipulator::POSITION_APPEND)
+                        ->addLegend('section_legend', null, PaletteManipulator::POSITION_PREPEND)
+                        ->addField('sectionHeadline', 'section_legend', PaletteManipulator::POSITION_APPEND)
                         ->applyToPalette($palette, 'tl_content')
                     ;
                 } catch (\Throwable) {
